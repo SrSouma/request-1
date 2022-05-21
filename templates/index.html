@@ -21,10 +21,7 @@
               <input name="name" value="{{ conta.name }}">
               <input name="email" value="{{ conta.email }}">
               <input name="phone" value="{{ conta.phone }}">
-              <button type="submit"">&#9998;</button>
-              {% if conta[5] == 0 %}
-                <a href="/complete/{{ conta[0] }}">✅</a>
-              {% endif %}
+              <button type="submit"">Editar</button>
               <a href="/delete/{{ loop.index0 }}">❌</a>
             </form>            
           </li>

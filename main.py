@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 contatos = [
     {'name': 'João da Silva', 'email': 'joao@gmail.com', 'phone': '(16)99922-1122'},
-    {'name': 'Maria Souza', 'email': 'maria1@gmail.om', 'phone': '(16)99922-3333'},
+    {'name': 'Maria Souza', 'email': 'maria1@gmail.com', 'phone': '(16)99922-3333'},
 ]
 
 @app.route('/')
