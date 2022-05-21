@@ -6,6 +6,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
+contatos = [
+    {'name': 'João da Silva', 'email': 'joao@gmail.com', 'phone': '(16)99922-1122'},
+    {'name': 'Maria Souza', 'email': 'maria1@gmail.om', 'phone': '(16)99922-3333'},
+]
+
 class Users(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String())
@@ -29,7 +34,7 @@ def index():
     contacts = Contacts.query.all()
     return render_template(
         'index.html',
-        contacts=contacts
+        contacts=contacts, contatos=contatos
     )
 
 @app.route('/create', methods=['POST'])
@@ -37,7 +42,10 @@ def create():
     name = request.form.get('name')
     email = request.form.get('email')
     phone = request.form.get('phone')
-
+    contatos.append({
+      'name': name, 'email': email, 'phone': phone,
+    })
+  
     new_contact = Contacts(
       name=name,
       email=email,
@@ -46,6 +54,21 @@ def create():
     db.session.add(new_contact)
     db.session.commit()
     return redirect('/')
+
+@app.route('/delete/<int:id>')
+def delete(id):
+  contatos.pop(id)
+  return redirect('/')
+
+@app.route('/update/<int:index>', methods=['POST'])
+def update(index):
+  name = request.form.get('name')
+  email = request.form.get('email')
+  phone = request.form.get('phone')
+  contatos[index]['name'] = name
+  contatos[index]['email'] = email
+  contatos[index]['phone'] = phone
+  return redirect('/')
 
 if __name__ == '__main__':
     db.create_all()

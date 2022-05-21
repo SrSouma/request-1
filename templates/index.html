@@ -3,27 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agenda de Contatos</title>
+  <title>Document</title>
 </head>
 <body>
-  <h1>Agenda de Contatos</h1>
-  <form action="/create" method="POST">
-      <input name="name" placeholder="Nome"> 
+    <h1>Agenda de Contatos</h1>
+    <form action="/create" method="POST">
+      <input name="nome" placeholder="Nome:">
+      <input name="email" placeholder="E-mail:">
+      <input name="phone" placeholder="Telefone:">
+      <button type="submit">Adicionar</button>
+    </form>
 
-      <input name="email" placeholder="E-mail">
+     <ul> 
+        {% for conta in contatos %}
+          <li>
+            <form action="/update/{{loop.index0}}" method="POST">
+              <input name="name" value="{{ conta.name }}">
+              <input name="email" value="{{ conta.email }}">
+              <input name="phone" value="{{ conta.phone }}">
+              <button type="submit"">&#9998;</button>
+              {% if conta[5] == 0 %}
+                <a href="/complete/{{ conta[0] }}">✅</a>
+              {% endif %}
+              <a href="/delete/{{ loop.index0 }}">❌</a>
+            </form>            
+          </li>
+          
+        {% endfor %}
+    </ul>
   
-      <input name="phone" placeholder="Telefone">
-  
-      <button type="submit">
-          Adicionar
-      </button>
-  </form>
-  <ul>
-    {% for contact in contacts %}
-      <li>
-        {{ contact['name'] }}
-      </li>
-    {% endfor %}
-  </ul>
+    
 </body>
 </html>
