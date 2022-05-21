@@ -8,13 +8,13 @@
 <body>
     <h1>Agenda de Contatos</h1>
     <form action="/create" method="POST">
-      <input name="nome" placeholder="Nome:">
+      <input name="name" placeholder="Nome:">
       <input name="email" placeholder="E-mail:">
       <input name="phone" placeholder="Telefone:">
       <button type="submit">Adicionar</button>
     </form>
 
-     <ul> 
+     <!--<ul> 
         {% for conta in contacts %}
           <li>
             <form action="/update/{{loop.index0}}" method="POST">
@@ -27,8 +27,22 @@
           </li>
           
         {% endfor %}
+    </ul>-->
+    <ul>
+      {% for x in contatos %}
+        <li>
+          {{x.name}}
+        </li>
+        {% endfor %}
     </ul>
+     <ul>
+      {% for c in contacts %}
+        <li>
+          {{c.name}}
+        </li>
+        {% endfor %}
+    </ul>
+
   
-    
 </body>
 </html>
