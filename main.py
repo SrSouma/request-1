@@ -53,17 +53,21 @@ def create():
 
 @app.route('/delete/<int:id>')
 def delete(id):
-  contacts.pop(id)
+  newcontacts = Contacts.query.filter_by(id=id).first()
+  db.session.delete(newcontacts)
+  db.session.commit()
   return redirect('/')
 
-@app.route('/update/<int:index>', methods=['POST'])
-def update(index):
+@app.route('/update/<int:id>', methods=['POST'])
+def update(id):
   name = request.form.get('name')
   email = request.form.get('email')
   phone = request.form.get('phone')
-  contacts[index]['name'] = name
-  contacts[index]['email'] = email
-  contacts[index]['phone'] = phone
+  newcontacts = Contacts.query.filter_by(id=id).first()
+  newcontacts.name = name
+  newcontacts.email = email
+  newcontacts.phone = phone
+  db.session.commit()
   return redirect('/')
 
 if __name__ == '__main__':

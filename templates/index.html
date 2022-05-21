@@ -14,33 +14,33 @@
       <button type="submit">Adicionar</button>
     </form>
 
-     <!--<ul> 
-        {% for conta in contacts %}
+    <ul> 
+        {% for conta in contatos %}
           <li>
-            <form action="/update/{{loop.index0}}" method="POST">
+            <form action="/update/{{conta.id}}" method="POST">
               <input name="name" value="{{ conta.name }}">
               <input name="email" value="{{ conta.email }}">
               <input name="phone" value="{{ conta.phone }}">
               <button type="submit"">Editar</button>
-              <a href="/delete/{{ loop.index0 }}">❌</a>
+              <a href="/delete/{{conta.id}}">❌</a>
             </form>            
           </li>
           
         {% endfor %}
-    </ul>-->
-    <ul>
-      {% for x in contatos %}
-        <li>
-          {{x.name}}
-        </li>
+
+       {% for contas in contacts %}
+          <li>
+            <form action="/update/{{contas.id}}" method="POST">
+              <input name="name" value="{{ contas.name }}">
+              <input name="email" value="{{ contas.email }}">
+              <input name="phone" value="{{ contas.phone }}">
+              <button type="submit"">Editar</button>
+              <a href="/delete/{{contas.id}}">❌</a>
+            </form>            
+          </li>
+          
         {% endfor %}
-    </ul>
-     <ul>
-      {% for c in contacts %}
-        <li>
-          {{c.name}}
-        </li>
-        {% endfor %}
+      
     </ul>
 
   
